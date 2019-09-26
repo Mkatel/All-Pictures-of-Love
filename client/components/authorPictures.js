@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getAuthors, getFolders, getPictures} from '../store'
+import {Link} from 'react-router-dom'
 
 class AuthorPictures extends React.Component {
   constructor() {
@@ -78,19 +79,10 @@ class AuthorPictures extends React.Component {
                     )
                   })
                 : ''}
-
-              {/* <li>folder1</li>
-                            <li>folder2</li>
-                            <li>folder3</li> */}
             </ul>
           </div>
           <div>
             <span className="span-hidden">{this.state.selectedFolderId}</span>
-
-            {/* <form>
-                            <input type = "text"></input>
-                            <button type = "submit">Add Folder</button>
-                        </form> */}
           </div>
         </div>
 
@@ -100,44 +92,33 @@ class AuthorPictures extends React.Component {
             Author: &nbsp;{' '}
             <select id="lang" onChange={this.handledAuthorChange}>
               {authors
-                ? authors.map((el, idx) => {
+                ? authors.map(el => {
                     return (
-                      <option key={idx} value={el.id}>
+                      <option key={el.id} value={el.id}>
                         {el.name}
                       </option>
                     )
                   })
                 : ''}
-
-              {/* <option value ="Kate">Kate</option>
-                                <option value ="Darin">Darin</option>
-                                <option value ="Ming">Ming</option> */}
             </select>&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="button" className="btn-regular">
-              Add Picture
-            </button>
+            <Link to="/addPictures">
+              <button type="button" className="btn-regular">
+                Add Picture
+              </button>
+            </Link>
           </div>
           <div className="warpper">
             <div className="img-area">
               {pics
-                ? pics.map((el, idx) => {
+                ? pics.map(el => {
                     return (
-                      <div className="single-img" key={idx}>
+                      <div className="single-img" key={el.id}>
                         <img src={el.imageDir} />
                         {el.description}
                       </div>
                     )
                   })
                 : ''}
-
-              {/* <div className = "single-img"><img src = "flag.png"  />Discover.jpg</div>
-                            <div className = "single-img"><img src = "flag.png"  />Discover.jpg</div>
-                            <div className = "single-img"><img src = "flag.png"  />Discover.jpg</div>
-                            <div className = "single-img"><img src = "flag.png"  />Discover.jpg</div>
-                            <div className = "single-img"><img src = "flag.png"  />Discover.jpg</div>
-                            <div className = "single-img"><img src = "flag.png"  />Discover.jpg</div>
-                            <div className = "single-img"><img src = "flag.png"  />Discover.jpg</div>
-                            <div className = "single-img"><img src = "flag.png"  />Discover.jpg</div> */}
             </div>
           </div>
         </div>

@@ -1,9 +1,11 @@
 import axios from 'axios'
 
 const initialState = {
-  pictures: []
+  pictures: [],
+  isSaved: false
 }
 
+// get
 const GETPICTURES = 'GETPICTURES'
 const gotPictures = pictures => {
   return {
@@ -21,10 +23,30 @@ export const getPictures = () => async dispatch => {
   }
 }
 
+// post
+const ADDNEWPICTURE = 'ADDNEWPICTURE'
+const addedNewPicture = picture => {
+  return {
+    type: 'ADDNEWPICTURE',
+    picture
+  }
+}
+
+export const addNewPicture = picture => async dispatch => {
+  try {
+    const res = await axios.post('/api/pictures', picture)
+    dispatch(addedNewPicture(res.data))
+  } catch (err) {
+    console.log('adding pictures data error', err.message)
+  }
+}
+
 export default function(state = initialState, action) {
   switch (action.type) {
     case GETPICTURES:
       return {...state, pictures: action.pictures}
+    case ADDNEWPICTURE:
+      return {...state, isSaved: true}
     default:
       return state
   }

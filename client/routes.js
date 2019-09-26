@@ -7,6 +7,7 @@ import {me} from './store'
 import Home from './components/home'
 import AllPictures from './components/allPictures'
 import AuthorPictures from './components/authorPictures'
+import AddPictures from './components/addPictures'
 
 /**
  * COMPONENT
@@ -23,6 +24,8 @@ class Routes extends Component {
       <Switch>
         <Route exact path="/allPictures" component={AllPictures} />
         <Route exact path="/authorPictures" component={AuthorPictures} />
+        <Route exact path="/addPictures" component={AddPictures} />
+
         <Route exact path="/" component={Home} />
         {/* {isLoggedIn ? (
           <Route exact path="/allPictures" component={AllPictures} />

@@ -170,3 +170,63 @@ li {
 }
 
 /* end authorpictures */
+
+/* start addpictures */
+.add-form-div {
+  display: flex;
+}
+.add-form-div-1 {
+  flex-grow: 1;
+  padding-top: 5px;
+  /* background-color: rgba(128, 128, 128, 0.029) */
+}
+.add-form-div-2 {
+  flex-grow: 5;
+  padding-top: 0px;
+  padding-left: 30px;
+}
+
+.add-form-div-2 img {
+  width: 100%;
+  height: 100%;
+}
+
+.add-form-div-1 form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.add-form-div input[type='submit'] {
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 30px 0;
+  width: 50%;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.add-form-div input[type='file'] {
+  /* display: none; */
+}
+
+.add-form-div select {
+  width: 80%;
+  height: 30px;
+}
+
+.custom-file-upload {
+  border: 2px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin: 8px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 30%;
+}
+/* 
+end addpictures */

@@ -38,11 +38,11 @@ class Home extends React.Component {
         <div>
           <div className="home-button-div">
             {categories
-              ? categories.map((el, idx) => {
+              ? categories.map(el => {
                   return (
                     <button
                       className="button-home"
-                      key={idx}
+                      key={el.id}
                       type="button"
                       name={el.id}
                       value={el.category}
@@ -53,21 +53,17 @@ class Home extends React.Component {
                   )
                 })
               : ''}
-            {/* <button type = "button" name = "0" onClick = {this.handedClick}>All</button> &nbsp; */}
           </div>
           <div className="warpper">
-            {/* <h1>Pictures</h1> */}
             <div className="img-area">
-              {pics.map((el, idx) => {
+              {pics.map(el => {
                 return (
-                  <div key={idx} className="single-img">
+                  <div key={el.id} className="single-img">
                     <img src={el.imageDir} />
                     {el.description}
                   </div>
                 )
               })}
-              {/* <div className = "single-img"><img src = {this.props.pictures[0].imageDir}  />Discover.jpg</div>
-                   */}
             </div>
           </div>
         </div>
@@ -79,7 +75,6 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log('state', state)
   return {
     pictures: state.picture.pictures,
     categories: state.category.categories
