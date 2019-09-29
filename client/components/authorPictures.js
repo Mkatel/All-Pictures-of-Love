@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getAuthors, getFolders, getPictures} from '../store'
+import {getAuthors, getFolders, getPictures, removePicture} from '../store'
 import {Link} from 'react-router-dom'
 
 class AuthorPictures extends React.Component {
@@ -12,6 +12,7 @@ class AuthorPictures extends React.Component {
     }
     this.handledFolderClick = this.handledFolderClick.bind(this)
     this.handledAuthorChange = this.handledAuthorChange.bind(this)
+    this.handledRemove = this.handledRemove.bind(this)
   }
 
   async componentDidMount() {
@@ -24,7 +25,6 @@ class AuthorPictures extends React.Component {
   }
 
   handledFolderClick(evt) {
-    console.log('evt', evt.target.className)
     this.setState({selectedFolderId: evt.target.value})
     if (evt.target.className) {
       evt.target.className = null
@@ -33,25 +33,42 @@ class AuthorPictures extends React.Component {
     }
   }
 
-  handledAuthorChange(evt) {
-    const fid = this.props.folders ? this.props.folders[0].id : 1
-    this.setState({selectedAuthorId: evt.target.value, selectedFolderId: fid})
+  async handledAuthorChange(evt) {
+    const aid = document.getElementById('author').value
+    let fid = 1
+    if (this.props.folders && this.props.folders.length > 0) {
+      const ret = this.props.folders.filter(el => el.author_id == aid)
+      if (ret.length > 0) {
+        fid = ret[0].id
+      }
+    }
+    await this.setState(currentState => {
+      return {selectedAuthorId: aid, selectedFolderId: fid}
+    })
+  }
+
+  async handledRemove(evt) {
+    await this.props.removePicture(evt.target.name)
   }
 
   render() {
     const {authors, folders, pictures} = this.props
+
     const selectedAuthorId =
-      this.state.selectedAuthorId >= 0
+      this.state.selectedAuthorId > 0
         ? this.state.selectedAuthorId
         : this.props.selectedAuthorId
     const selectedFolderId =
-      this.state.selectedFolderId >= 0
+      this.state.selectedFolderId > 0
         ? this.state.selectedFolderId
         : this.props.selectedFolderId
-    //console.log("ids", selectedAuthorId, selectedFolderId);
+
+    const flds = folders.filter(el => {
+      return el.author_id == selectedAuthorId
+    })
 
     const pics = pictures.filter(el => {
-      return el.authorId == selectedAuthorId && el.folderId == selectedFolderId
+      return el.author_id == selectedAuthorId && el.album_id == selectedFolderId
     })
 
     return (
@@ -59,22 +76,22 @@ class AuthorPictures extends React.Component {
         <div className="left">
           <div>
             <ul>
-              {folders
-                ? folders.map((el, idx) => {
+              {flds
+                ? flds.map(el => {
                     return (
                       <li
-                        key={idx}
+                        key={el.id}
                         value={el.id}
                         onClick={this.handledFolderClick}
                         className={el.id == selectedFolderId ? 'active' : null}
                       >
                         <img
                           src="folderclose.png"
-                          width="40px"
-                          height="40px"
+                          width="20px"
+                          height="20px"
                           id={el.id}
                         />
-                        {el.folder}
+                        {el.album}
                       </li>
                     )
                   })
@@ -90,7 +107,7 @@ class AuthorPictures extends React.Component {
           <div className="container-imgs-col2-filter">
             <span className="span-hidden">{this.state.selectedAuthorId}</span>
             Author: &nbsp;{' '}
-            <select id="lang" onChange={this.handledAuthorChange}>
+            <select id="author" onChange={this.handledAuthorChange}>
               {authors
                 ? authors.map(el => {
                     return (
@@ -113,8 +130,20 @@ class AuthorPictures extends React.Component {
                 ? pics.map(el => {
                     return (
                       <div className="single-img" key={el.id}>
-                        <img src={el.imageDir} />
-                        {el.description}
+                        <div>
+                          <img src={el.imageDir} />
+                        </div>
+                        <div className="img-desc-ap">{el.description}</div>
+                        <div className="button-div">
+                          <button
+                            name={el.id}
+                            id={el.id}
+                            className="button-home"
+                            onClick={this.handledRemove}
+                          >
+                            Remove
+                          </button>
+                        </div>
                       </div>
                     )
                   })
@@ -128,17 +157,20 @@ class AuthorPictures extends React.Component {
 }
 
 const mapStateToProps = state => {
+  const authorId =
+    state.author.authors && state.author.authors.length > 0
+      ? state.author.authors[0].id
+      : 0
+  let folderId = 0
+  if (authorId > 0 && state.folder.folders && state.folder.folders.length > 0) {
+    folderId = state.folder.folders.filter(el => el.author_id === authorId)[0]
+      .id
+  }
   return {
     authors: state.author.authors,
     folders: state.folder.folders,
-    selectedAuthorId:
-      state.author.authors && state.author.authors.length > 0
-        ? state.author.authors[0].id
-        : 0,
-    selectedFolderId:
-      state.folder.folders && state.folder.folders.length > 0
-        ? state.folder.folders[0].id
-        : 0,
+    selectedAuthorId: authorId,
+    selectedFolderId: folderId,
     pictures: state.picture.pictures
   }
 }
@@ -147,7 +179,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getAuthors: () => dispatch(getAuthors()),
     getFolders: () => dispatch(getFolders()),
-    getPictures: () => dispatch(getPictures())
+    getPictures: () => dispatch(getPictures()),
+    removePicture: id => dispatch(removePicture(id))
   }
 }
 

@@ -85,7 +85,10 @@ form div {
   height: 120px;
 }
 .nav-2 {
-  text-align: end;
+  text-align: right;
+  display: flex;
+  padding-left: 160px;
+  padding-top: 10px;
 }
 
 .logo-div {
@@ -167,6 +170,8 @@ li {
 .btn-regular {
   height: 30px;
   border-radius: 10px;
+  background-color: rgba(35, 48, 9, 0.637);
+  color: white;
 }
 
 /* end authorpictures */
@@ -174,16 +179,22 @@ li {
 /* start addpictures */
 .add-form-div {
   display: flex;
+  /* width: 100%;
+  height: auto; */
+  /* background-color: black; */
+  /* color: white; */
 }
+
 .add-form-div-1 {
-  flex-grow: 1;
-  padding-top: 5px;
+  flex-grow: 50%;
+  padding-top: 10px;
   /* background-color: rgba(128, 128, 128, 0.029) */
 }
+
 .add-form-div-2 {
-  flex-grow: 5;
+  flex-grow: 50%;
   padding-top: 0px;
-  padding-left: 30px;
+  padding-left: 5px;
 }
 
 .add-form-div-2 img {
@@ -218,6 +229,11 @@ li {
   height: 30px;
 }
 
+.add-form-div input[type='text'] {
+  width: 75%;
+  height: 25px;
+}
+
 .custom-file-upload {
   border: 2px solid #ccc;
   display: inline-block;
@@ -230,3 +246,37 @@ li {
 }
 /* 
 end addpictures */
+
+.home-textbox {
+  width: 100px;
+  border-radius: 15px;
+  height: 30px;
+}
+
+.nav-span {
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.home-span-desc {
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.img-desc-ap,
+.img-desc {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman';
+  font-size: 18px;
+  padding-top: 5px;
+  color: rgb(45, 52, 45);
+}
+
+.img-desc {
+  padding-bottom: 1px;
+}
+
+.button-div {
+  padding-bottom: 5px;
+}

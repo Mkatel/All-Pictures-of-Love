@@ -13,7 +13,8 @@ const gotFolders = folders => ({
 export const getFolders = () => {
   return async dispatch => {
     try {
-      const res = await axiso.get('/api/folders')
+      //const res = await axiso.get('/api/folders'); // for postgres
+      const res = await axiso.get('/apimysql/albums') // for mysql
       dispatch(gotFolders(res.data))
     } catch (err) {
       console.log('getting author error', err.message)

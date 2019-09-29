@@ -3,168 +3,168 @@
 const db = require('../server/db')
 const {User, Picture, Category, Folder, Author} = require('../server/db/models')
 
-const authors = [
-  {
-    name: 'Kate Lei',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    name: 'Yang Wu',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    name: 'Ming Li',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  }
-]
+// const authors = [
+//   {
+//     name: 'Kate Lei',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     name: 'Yang Wu',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     name: 'Ming Li',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   }
+// ]
 
-const categories = [
-  {
-    category: 'All',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    category: 'Folwers',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    category: 'Animals',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    category: 'Fall',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    category: 'Spring',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    category: 'People',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  }
-]
+// const categories = [
+//   {
+//     category: 'All',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     category: 'Folwers',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     category: 'Animals',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     category: 'Fall',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     category: 'Spring',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     category: 'People',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   }
+// ]
 
-const folders = [
-  {
-    folder: 'Folder092019',
-    authorId: 1,
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    folder: 'Folder092019',
-    authorId: 2,
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    folder: 'Folder092019',
-    authorId: 3,
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  }
-]
+// const folders = [
+//   {
+//     folder: 'Folder092019',
+//     authorId: 1,
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     folder: 'Folder092019',
+//     authorId: 2,
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     folder: 'Folder092019',
+//     authorId: 3,
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   }
+// ]
 
-const pictures = [
-  {
-    name: 'Kids',
-    description: 'Loving Kids',
-    imageDir: 'pic20190920-2.png',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    name: 'Animal - 1',
-    description: 'Loving animals',
-    imageDir: 'pic20190920-7.png',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    name: 'Animal - 2',
-    description: 'Loving animals',
-    imageDir: 'pic20190920-9.png',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    name: 'Animal - 3',
-    description: 'Loving animals',
-    imageDir: 'pic20190920-10.png',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    name: 'Animal - 4',
-    description: 'Loving animals',
-    imageDir: 'pic20190920-11.png',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    name: 'Animal - 5',
-    description: 'Loving animals',
-    imageDir: 'pic20190920-12.png',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    name: 'Animal - 6',
-    description: 'Loving animals',
-    imageDir: 'pic20190920-13.png',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    name: 'Animal - 7',
-    description: 'Loving animals',
-    imageDir: 'pic20190920-14.png',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    name: 'Animal - 8',
-    description: 'Loving animals',
-    imageDir: 'pic20190920-15.png',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    name: 'Animal - 9',
-    description: 'Loving animals',
-    imageDir: 'pic20190920-16.png',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    name: 'Animal - 10',
-    description: 'Loving animals',
-    imageDir: 'pic20190920-17.png',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  },
-  {
-    name: 'Animal - 11',
-    description: 'Loving animals',
-    imageDir: 'pic20190920-18.png',
-    createdAt: '2019-09-21',
-    updatedAt: '2019-09-21'
-  }
-]
+// const pictures = [
+//   {
+//     name: 'Kids',
+//     description: 'Loving Kids',
+//     imageDir: 'pic20190920-2.png',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     name: 'Animal - 1',
+//     description: 'Loving animals',
+//     imageDir: 'pic20190920-7.png',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     name: 'Animal - 2',
+//     description: 'Loving animals',
+//     imageDir: 'pic20190920-9.png',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     name: 'Animal - 3',
+//     description: 'Loving animals',
+//     imageDir: 'pic20190920-10.png',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     name: 'Animal - 4',
+//     description: 'Loving animals',
+//     imageDir: 'pic20190920-11.png',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     name: 'Animal - 5',
+//     description: 'Loving animals',
+//     imageDir: 'pic20190920-12.png',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     name: 'Animal - 6',
+//     description: 'Loving animals',
+//     imageDir: 'pic20190920-13.png',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     name: 'Animal - 7',
+//     description: 'Loving animals',
+//     imageDir: 'pic20190920-14.png',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     name: 'Animal - 8',
+//     description: 'Loving animals',
+//     imageDir: 'pic20190920-15.png',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     name: 'Animal - 9',
+//     description: 'Loving animals',
+//     imageDir: 'pic20190920-16.png',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     name: 'Animal - 10',
+//     description: 'Loving animals',
+//     imageDir: 'pic20190920-17.png',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   },
+//   {
+//     name: 'Animal - 11',
+//     description: 'Loving animals',
+//     imageDir: 'pic20190920-18.png',
+//     createdAt: '2019-09-21',
+//     updatedAt: '2019-09-21'
+//   }
+// ]
 
 async function seed() {
-  //await db.sync({force: true})
-  await db.sync()
+  await db.sync({force: true})
+  //await db.sync()
   console.log('db synced!')
 
   // await Promise.all(
@@ -185,11 +185,11 @@ async function seed() {
   //   })
   // )
 
-  await Promise.all(
-    pictures.map(picture => {
-      return Picture.create(picture)
-    })
-  )
+  // await Promise.all(
+  //   pictures.map(picture => {
+  //     return Picture.create(picture)
+  //   })
+  // )
 
   ///////////////////////////////////
   // user

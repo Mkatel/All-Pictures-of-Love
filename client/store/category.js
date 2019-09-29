@@ -12,7 +12,8 @@ const gotCategories = categories => ({
 
 export const getCategories = () => async dispatch => {
   try {
-    const res = await axios.get('/api/categories')
+    //const res = await axios.get('/api/categories'); // for postgres
+    const res = await axios.get('/apimysql/categories') // for mysql
     dispatch(gotCategories(res.data))
   } catch (err) {
     console.log('getting categories data error', err.message)

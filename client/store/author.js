@@ -13,7 +13,8 @@ const gotAuthors = authors => ({
 export const getAuthors = () => {
   return async dispatch => {
     try {
-      const res = await axiso.get('/api/authors')
+      //const res = await axiso.get('/api/authors'); // for postgres
+      const res = await axiso.get('/apimysql/authors') // for mysql
       dispatch(gotAuthors(res.data))
     } catch (err) {
       console.log('getting author error', err.message)
